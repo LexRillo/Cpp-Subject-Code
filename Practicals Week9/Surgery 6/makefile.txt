@@ -1,0 +1,26 @@
+# Makefile
+
+# the C++ compiler
+CXX     = g++
+CC      = $(CXX)
+
+# options to pass to the compiler
+CXXFLAGS = -Wall -ansi -g  -std=c++11
+
+all: main
+
+main:	main.cpp Student.o Department.o
+	$(CXX) $(CXXFLAGS) main.cpp Student.o Department.o -o main
+
+Student.o:	Student.cpp Student.h 
+	$(CXX) $(CXXFLAGS) -c Student.cpp 
+
+Department.o:	Department.cpp Department.h 
+	$(CXX) $(CXXFLAGS) -c Department.cpp 
+
+deepclean: 
+	-rm -f *~ *.o main main.exe
+
+clean:
+	-rm -f *~ *.o 
+

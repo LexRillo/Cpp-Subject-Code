@@ -1,0 +1,16 @@
+# Makefile
+
+# the C++ compiler
+CXX     = g++
+CC      = $(CXX)
+
+# options to pass to the compiler
+CXXFLAGS = -Wall -ansi -O2 -g
+
+GuessRun: GuessRun.cpp GuessPlayer.hpp GuessPlayer.o
+	$(CXX) $(CXXFLAGS)  GuessRun.cpp GuessPlayer.o -o GuessRun
+
+GuessPlayer.o: GuessPlayer.cpp GuessPlayer.hpp
+	$(CXX) $(CXXFLAGS) -c GuessPlayer.cpp 
+
+

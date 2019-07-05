@@ -1,0 +1,29 @@
+# Makefile
+
+# the C++ compiler
+CXX     = g++
+CXXVERSION = $(shell g++ --version | grep ^g++ | sed 's/^.* //g')
+
+# options to pass to the compiler
+CXXFLAGS = -O0 -g3
+
+ifeq "$(CXXVERSION)" "4.6.3"
+	CXXFLAGS += -std=c++0x
+else
+	CXXFLAGS += -std=c++11
+endif
+
+all: main 
+
+main:	main.cpp Binary.o 
+	$(CXX) $(CXXFLAGS) main.cpp Binary.o -o main
+
+Binary.o:	Binary.cpp Binary.h 
+	$(CXX) $(CXXFLAGS) -c Binary.cpp 
+
+deepclean: 
+	-rm -f *~ *.o main *.exe
+
+clean:
+	-rm -f *~ *.o *.stackdump
+

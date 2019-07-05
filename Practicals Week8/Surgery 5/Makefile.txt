@@ -1,0 +1,25 @@
+# Makefile
+
+# the C++ compiler
+CXX     = g++
+CC      = $(CXX)
+
+# options to pass to the compiler
+CXXFLAGS = -Wall -std=c++11 -O2 -g
+
+All: all
+all: main
+
+main:	main.cpp Animal.o
+	$(CXX) $(CXXFLAGS) main.cpp Animal.o -o main
+
+Animal.o: Animal.cpp Animal.h 
+	$(CXX) $(CXXFLAGS) -c Animal.cpp 
+
+deepclean: 
+	rm -f *~ *.o Main
+
+clean:
+	-rm -f *~ *.o 
+
+

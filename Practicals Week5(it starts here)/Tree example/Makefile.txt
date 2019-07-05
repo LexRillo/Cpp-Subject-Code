@@ -1,0 +1,16 @@
+# Makefile
+
+# the C++ compiler
+CXX     = g++
+CC      = $(CXX)
+
+# options to pass to the compiler
+CXXFLAGS = -Wall -g -ansi -O2
+
+TreeRun: TreeRun.cpp Tree.hpp Tree.o
+	$(CXX) $(CXXFLAGS)  TreeRun.cpp Tree.o -o TreeRun
+
+Tree.o: Tree.cpp Tree.hpp
+	$(CXX) $(CXXFLAGS) -c Tree.cpp 
+
+

@@ -1,0 +1,48 @@
+# Makefile
+
+# the C++ compiler
+CXX     = g++
+CXXVERSION = $(shell g++ --version | grep ^g++ | sed 's/^.* //g')
+
+# options to pass to the compiler
+CXXFLAGS = -O0 -g3
+
+ifeq "$(CXXVERSION)" "4.6.3"
+	CXXFLAGS += -std=c++0x
+else
+	CXXFLAGS += -std=c++11
+endif
+
+All: all
+all: main
+
+main:	main.cpp Path.o Priority.h
+	$(CXX) $(CXXFLAGS) main.cpp Path.o -o main
+
+PathMain: PathMain.cpp Path.o PathTester.o TesterBase.o 
+	$(CXX) $(CXXFLAGS) PathMain.cpp Path.o PathTester.o TesterBase.o -o PathMain
+
+PathTester.o: PathTester.cpp PathTester.h Path.h TesterBase.h
+	$(CXX) $(CXXFLAGS) -c PathTester.cpp -o PathTester.o
+
+Path.o: Path.cpp Path.h
+	$(CXX) $(CXXFLAGS) -c Path.cpp
+
+PriorityMain: PriorityMain.cpp PriorityTester.o TesterBase.o 
+	$(CXX) $(CXXFLAGS) PriorityMain.cpp PriorityTester.o TesterBase.o -o PriorityMain
+
+PriorityTester.o: PriorityTester.cpp PriorityTester.h Priority.h TesterBase.h
+	$(CXX) $(CXXFLAGS) -c PriorityTester.cpp -o PriorityTester.o
+
+TesterBase.o: TesterBase.cpp TesterBase.h
+	$(CXX) $(CXXFLAGS) -c TesterBase.cpp -o TesterBase.o
+
+
+
+deepclean: 
+	-rm -f *~ *.o main *.stackdump *.exe PathMain PriorityMain
+
+clean:
+	-rm -f *~ *.o *.stackdump
+
+

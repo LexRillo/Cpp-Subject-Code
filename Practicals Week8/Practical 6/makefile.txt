@@ -1,0 +1,21 @@
+# Makefile
+
+# the C++ compiler
+CXX     = g++
+CC      = $(CXX)
+
+# options to pass to the compiler
+CXXFLAGS = -std=c++11	-O0 -g3
+
+All: all
+all: main
+
+main:	main.cpp VectorTester.h Vector.h LinkedListTester.h LinkedList.h
+	$(CXX) $(CXXFLAGS) main.cpp -o main
+
+deepclean: 
+	rm -f *~ *.o main *.exe *.stackdump
+
+clean:
+	-rm -f *~ *.o *.stackdump
+

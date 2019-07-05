@@ -1,0 +1,51 @@
+# Makefile
+
+# the C++ compiler
+CXX     = g++
+CXXVERSION = $(shell g++ --version | grep ^g++ | sed 's/^.* //g')
+
+# options to pass to the compiler
+CXXFLAGS = -O0 -g3
+
+ifeq "$(CXXVERSION)" "4.6.3"
+	CXXFLAGS += -std=c++0x
+else
+	CXXFLAGS += -std=c++11
+endif
+
+All: all
+all: main StateMain AutomatonMain
+
+main:	main.cpp State.o Transition.o Automaton.o
+	$(CXX) $(CXXFLAGS) main.cpp State.o Transition.o Automaton.o -o main
+
+AutomatonMain:	AutomatonMain.cpp Automaton.o State.o Transition.o AutomatonTester.o TesterBase.o
+	$(CXX) $(CXXFLAGS) AutomatonMain.cpp Automaton.o State.o Transition.o AutomatonTester.o TesterBase.o -o AutomatonMain
+
+StateMain:	StateMain.cpp State.o Transition.o StateTester.o TesterBase.o
+	$(CXX) $(CXXFLAGS) StateMain.cpp State.o Transition.o StateTester.o TesterBase.o -o StateMain
+
+State.o: State.cpp State.h 
+	$(CXX) $(CXXFLAGS) -c State.cpp 
+
+Transition.o: Transition.cpp Transition.h
+	$(CXX) $(CXXFLAGS) -c Transition.cpp
+
+Automaton.o: Automaton.cpp Automaton.h
+	$(CXX) $(CXXFLAGS) -c Automaton.cpp
+
+AutomatonTester.o: AutomatonTester.cpp AutomatonTester.h State.h Automaton.h Transition.h
+	$(CXX) $(CXXFLAGS) -c AutomatonTester.cpp
+
+StateTester.o: StateTester.cpp StateTester.h State.h Transition.h
+	$(CXX) $(CXXFLAGS) -c StateTester.cpp
+
+TesterBase.o: TesterBase.cpp TesterBase.h
+	$(CXX) $(CXXFLAGS) -c TesterBase.cpp
+
+deepclean: 
+	rm -f *~ *.o main *.exe *.stackdump StateMain AutomatonMain
+
+clean:
+	-rm -f *~ *.o *.stackdump
+
