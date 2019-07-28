@@ -6,6 +6,7 @@
  Assignment1 -> Complete the model of an Automaton using dynamic memory allocation.
  Assignment2 -> There are two tasks for this assignment. First one is to use inheritance to construct the classes for different bank types. Second one uses inheritance to construct a system that parses boolean formulas. For instance it can parse "(not (true or false))" and return the result
  Assignment3 -> There are two tasks for this assignment. First one is to use templates to construct a takes tasks with different priorities and returns them according to which priority is selected. Second one uses Takes a set of map directions to construct the path that a point when given said instuctions. The map is text base but expands (through dynamic memory) depending on how far the path is taken.
+ 
 ------
 Requirements:
 -Linux
