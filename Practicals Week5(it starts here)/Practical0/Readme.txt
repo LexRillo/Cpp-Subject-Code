@@ -1,3 +1,5 @@
+Explanation of the example:
+
 This is a formative exercise (i.e., does not count towards final grade) practicing the basic concepts about classes.
 In this exercise, you will experiment with C++ in a way that will (hopefully) help understand the concept of classes. The idea of the exercise builds towards the other practicals.
 Further instructions are included in main.cpp.
